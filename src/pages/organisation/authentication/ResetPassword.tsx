@@ -1,11 +1,9 @@
 import React from 'react'
 
 import { Link, useSearchParams } from 'react-router-dom' // Assuming React Router is used
-import ResetPasswordForm from './ResetPasswordForm'
+import ResetOrganisationPasswordForm from './ResetPasswordForm'
 
-const ResetPassword: React.FC = () => {
-
- 
+const ResetOrganisationPassword: React.FC = () => {
   const [searchParams] = useSearchParams()
   const code = searchParams.get('code')
   console.log(code)
@@ -14,16 +12,15 @@ const ResetPassword: React.FC = () => {
   const now = Date.now()
   const linkIsValid = code && exp && exp > now
 
-
   return (
-    <div className='font-montserrat flex max-md:flex-col justify-center items-center gap-5 min-h-screen'>
-      <div className='md:w-[30%]'>
-        <h1 className='text-6xl max-md:text-4xl font-semibold'>Tonlynx</h1>
+    <div className="font-montserrat flex max-md:flex-col justify-center items-center gap-5 min-h-screen">
+      <div className="md:w-[30%]">
+        <h1 className="text-6xl max-md:text-4xl font-semibold">Tonlynx</h1>
         <p>Empower change, touch a life...</p>
       </div>
       <div className="md:w-[30%]">
         {linkIsValid ? (
-          <ResetPasswordForm code={code} />
+          <ResetOrganisationPasswordForm code={code} />
         ) : (
           <>
             <div className="flex justify-center items-center h-screen bg-gray-100">
@@ -37,7 +34,7 @@ const ResetPassword: React.FC = () => {
                 </p>
 
                 <Link
-                  to="/volunteer/password/forgot"
+                  to="/organisation/password/forgot"
                   className="mt-4 inline-block bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded transition"
                 >
                   Request New Link
@@ -51,4 +48,4 @@ const ResetPassword: React.FC = () => {
   )
 }
 
-export default ResetPassword
+export default ResetOrganisationPassword

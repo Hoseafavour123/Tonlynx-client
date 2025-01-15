@@ -1,9 +1,10 @@
 import { Navigate, Outlet } from 'react-router-dom'
-import { useVolunteerAuthContext } from '../../context/VolunteerAuthContext'
+import { useOrganisationAuthContext } from '../../context/OrganisationAuthContext'
 
-const VolunteerContainer = () => {
-  const { volunteer, isLoading } = useVolunteerAuthContext()
+const OrganisationContainer = () => {
+  const { organisation, isLoading } = useOrganisationAuthContext()
 
+  // Show loading spinner while checking authentication
   if (isLoading) {
     return (
       <div className="flex justify-center items-center h-[90vh] w-full flex-col">
@@ -12,10 +13,11 @@ const VolunteerContainer = () => {
     )
   }
 
-  if (!volunteer) {
+  // Redirect to login if no volunteer is authenticated
+  if (!organisation) {
     return (
       <Navigate
-        to="/volunteer/login"
+        to="/organisation/login"
         replace
         state={{
           redirectUrl: window.location.pathname,
@@ -24,11 +26,13 @@ const VolunteerContainer = () => {
     )
   }
 
+  // Render the Outlet if volunteer is authenticated
   return (
     <div className="min-h-screen">
+      {/* <UserMenu /> */}
       <Outlet />
     </div>
   )
 }
 
-export default VolunteerContainer
+export default OrganisationContainer

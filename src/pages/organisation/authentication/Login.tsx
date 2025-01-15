@@ -1,7 +1,7 @@
 import React from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
-import * as apiVolunteer from '../../../apiVolunteer'
+import * as apiOrganisation from '../../../apiOrganisation'
 import { useMutation } from 'react-query'
 import { useAppContext } from '../../../context/AppContext'
 
@@ -10,7 +10,7 @@ export interface LoginFormData {
   password: string
 }
 
-const VolunteerLogin: React.FC = () => {
+const OrganisationLogin: React.FC = () => {
   const { showToast } = useAppContext()
   const navigate = useNavigate()
   const {
@@ -19,9 +19,9 @@ const VolunteerLogin: React.FC = () => {
     formState: { errors },
   } = useForm<LoginFormData>()
 
-  const { mutate, isLoading } = useMutation(apiVolunteer.loginVolunteer, {
+  const { mutate, isLoading } = useMutation(apiOrganisation.loginOrganisation, {
     onSuccess: () => {
-      navigate('/', { replace: true })
+      navigate('/organisation', { replace: true })
     },
     onError: (err: Error) => {
       showToast({ message: err.message, type: 'ERROR' })
@@ -40,7 +40,7 @@ const VolunteerLogin: React.FC = () => {
       </div>
 
       <div className="md:w-[30%] mt-10 p-6 bg-white rounded-lg shadow-md">
-        <h2 className="text-2xl font-bold mb-6 text-center">Volunteer Login</h2>
+        <h2 className="text-2xl font-bold mb-6 text-center">Organisation Login</h2>
         <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">
@@ -72,7 +72,7 @@ const VolunteerLogin: React.FC = () => {
             )}
           </div>
           <p className=" text-sm text-right text-indigo-500">
-            <Link to={'/volunteer/password/forgot'}>Forgot password?</Link>
+            <Link to={'/organisation/password/forgot'}>Forgot password?</Link>
           </p>
           <button
             disabled={isLoading}
@@ -88,7 +88,7 @@ const VolunteerLogin: React.FC = () => {
           <p className="text-sm">
             New here?{' '}
             <span className=" text-indigo-500">
-              <Link to={'/volunteer/register'}>Register</Link>
+              <Link to={'/organisation/register'}>Register Organisation</Link>
             </span>
           </p>
         </form>
@@ -97,4 +97,4 @@ const VolunteerLogin: React.FC = () => {
   )
 }
 
-export default VolunteerLogin
+export default OrganisationLogin

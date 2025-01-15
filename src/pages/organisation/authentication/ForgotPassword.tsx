@@ -1,14 +1,14 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useMutation } from 'react-query'
-import * as apiVolunteer from '../../../apiVolunteer'
+import * as apiOrganisation from '../../../apiOrganisation'
 import { Link } from 'react-router-dom'
 
 export type ForgotPasswordFormData = {
   email: string
 }
 
-const ForgotPassword: React.FC = () => {
+const ForgotOrganisationPassword: React.FC = () => {
   const [errMsg, setErrMsg] = useState<string | null>(null)
   const {
     register,
@@ -17,7 +17,7 @@ const ForgotPassword: React.FC = () => {
   } = useForm<ForgotPasswordFormData>()
 
   const { mutate, isLoading, isSuccess, isError } = useMutation(
-    apiVolunteer.sendForgotPasswordEmail,
+    apiOrganisation.sendForgotPasswordEmail,
     {
       onError: (err: Error) => {
         setErrMsg(err.message)
@@ -30,9 +30,9 @@ const ForgotPassword: React.FC = () => {
   }
 
   return (
-    <div className='font-montserrat flex max-md:flex-col justify-center items-center gap-5 min-h-screen'>
-      <div className='md:w-[30%]'>
-        <h1 className='text-6xl max-md:text-4xl font-semibold'>Tonlynx</h1>
+    <div className="font-montserrat flex max-md:flex-col justify-center items-center gap-5 min-h-screen">
+      <div className="md:w-[30%]">
+        <h1 className="text-6xl max-md:text-4xl font-semibold">Tonlynx</h1>
         <p>Empower change, touch a life...</p>
       </div>
       <div className="md:w-[30%]">
@@ -88,11 +88,11 @@ const ForgotPassword: React.FC = () => {
           <div className="text-sm mt-2">
             <p className="text-sm">
               Go back to{' '}
-              <Link to={'/volunteer/register'} className="text-indigo-500">
+              <Link to={'/organisation/register'} className="text-indigo-500">
                 Register
               </Link>{' '}
               or{' '}
-              <Link to={'/volunteer/login'} className="text-indigo-500">
+              <Link to={'/organisation/login'} className="text-indigo-500">
                 Login
               </Link>
             </p>
@@ -104,4 +104,4 @@ const ForgotPassword: React.FC = () => {
   )
 }
 
-export default ForgotPassword
+export default ForgotOrganisationPassword

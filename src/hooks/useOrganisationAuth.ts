@@ -1,17 +1,17 @@
 import { useQuery } from "react-query"
-import * as apiVolunteer from '../apiVolunteer'
+import * as apiOrganisation from '../apiOrganisation'
 
-export const AUTH_ORGANISATION = 'auth'
+export const AUTH_ORGANISATION = 'auth_organisation'
 
 const useOrganisationAuth = (opts = {}) => {
-    const { data: volunteer, ...rest } = useQuery({
+    const { data: organisation, ...rest } = useQuery({
         queryKey: [AUTH_ORGANISATION],
-        queryFn: apiVolunteer.getVolunteer,
+        queryFn: apiOrganisation.getOrganisation,
         staleTime:Infinity,
         ...opts
     })
     
-    return { volunteer, ...rest }
+    return { organisation, ...rest }
 }
 
 export default useOrganisationAuth

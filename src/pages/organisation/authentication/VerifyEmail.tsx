@@ -1,18 +1,18 @@
 import { Link, useParams } from 'react-router-dom'
 import { useQuery } from 'react-query'
-import * as apiVolunteer from '../../../apiVolunteer'
+import * as apiOrganisation from '../../../apiOrganisation'
 import { AiOutlineCheckCircle, AiOutlineCloseCircle } from 'react-icons/ai'
 
 export type Activation = {
   otpString: string
 }
 
-const VerifyVolunteerEmail = () => {
+const VerifyOrganisationEmail = () => {
   const { code } = useParams()
 
   const { isLoading, isSuccess, isError } = useQuery('verifyEmail', () => {
     if (code) {
-      return apiVolunteer.verifyEmail(code)
+      return apiOrganisation.verifyOrganisationEmail(code)
     }
   })
 
@@ -40,7 +40,7 @@ const VerifyVolunteerEmail = () => {
               </p>
               <p>
                 <Link
-                  to="/volunteer/login"
+                  to="/organisation/login"
                   className="text-sm font-semibold text-blue-800"
                 >
                   Login
@@ -59,14 +59,17 @@ const VerifyVolunteerEmail = () => {
               </p>
               <p>
                 <Link
-                  to="/volunteer/password/reset"
+                  to="/organisation/password/reset"
                   className="text-sm font-semibold text-blue-800"
                 >
                   Get new link
                 </Link>
               </p>
               <p>
-                <Link to="/" className="text-sm font-semibold text-blue-800">
+                <Link
+                  to="/organisation"
+                  className="text-sm font-semibold text-blue-800"
+                >
                   Go to Home
                 </Link>
               </p>
@@ -77,4 +80,4 @@ const VerifyVolunteerEmail = () => {
     </div>
   )
 }
-export default VerifyVolunteerEmail
+export default VerifyOrganisationEmail

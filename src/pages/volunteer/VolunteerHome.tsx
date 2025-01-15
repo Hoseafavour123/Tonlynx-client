@@ -7,7 +7,7 @@ const VolunteerHome: React.FC = () => {
     return (
       <div>
         <h1>
-          Welcome <span className='text-indigo-600 font-montserrat'> {volunteer.firstName}</span> to the Volunteer Home Page
+          Welcome <span className='text-indigo-600 font-montserrat'> {volunteer?.firstName}</span> to the Volunteer Home Page
         </h1>
       </div>
     )

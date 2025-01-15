@@ -2,6 +2,19 @@ import { ForgotPasswordFormData } from './pages/volunteer/authentication/ForgotP
 import { LoginFormData } from './pages/volunteer/authentication/Login'
 import { RegisterFormData } from './pages/volunteer/authentication/Register'
 
+
+type VolunteerReturnType = {
+  _id: string
+  firstName: string
+  lastName: string
+  email:string
+  about:string
+  jobTitle:string
+  imageInfo: {imageUrl: string, imageId: string}
+  createdAt: Date
+  updatedAt:Date
+}
+
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || ''
 
 export const registerVolunteer = async (formData: RegisterFormData) => {
@@ -39,9 +52,9 @@ export const loginVolunteer = async (formData: LoginFormData) => {
   return body
 }
 
+
 export const logoutVolunteer = async () => {
   const response = await fetch(`${API_BASE_URL}/auth/volunteer/logout`, {
-    method: 'POST',
     credentials: 'include',
   })
 
@@ -111,7 +124,7 @@ export const resetPassword = async (
   }
 }
 
-export const getVolunteer = async () => {
+export const getVolunteer = async (): Promise<VolunteerReturnType> => {
   const response = await fetch(`${API_BASE_URL}/volunteer/user`, {
     credentials: 'include',
   })
@@ -119,5 +132,21 @@ export const getVolunteer = async () => {
   if (!response.ok) {
     throw new Error(body.message)
   }
+  return body
+}
+
+
+export const updateVolunteer = async (formData: FormData): Promise<VolunteerReturnType> => {
+  const response = await fetch(`${API_BASE_URL}/volunteer/user/update`, {
+    credentials: 'include',
+    method: 'PUT',
+    body: formData,
+  })
+
+  const body = await response.json()
+  if (!response.ok) {
+    throw new Error(body.message)
+  }
+
   return body
 }

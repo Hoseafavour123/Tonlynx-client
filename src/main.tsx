@@ -6,10 +6,10 @@ import {ReactQueryDevtools} from 'react-query/devtools'
 import { QueryClient, QueryClientProvider } from 'react-query'
 import { AppContextProvider } from './context/AppContext'
 
-const queryClient = new QueryClient({
+export const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      retry: 3
+      retry: 2
     }
   }
 })

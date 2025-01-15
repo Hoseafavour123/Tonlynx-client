@@ -18,7 +18,7 @@ const InfoToast = ({ message, type, onClose }: ToastProps) => {
   }, [onClose])
 
   return (
-    <div className="absolute top-5 p-4 md:right-[30%] flex  flex-col gap-4">
+    <div className="z-20 absolute top-5 p-4 md:right-[30%] flex  flex-col gap-4">
       {type === 'SUCCESS' && (
         <Toast className='bg-green-500'>
           <div className="ml-2 text-sm font-normal text-white">
